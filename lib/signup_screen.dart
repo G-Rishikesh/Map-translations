@@ -88,52 +88,52 @@ class signup_screen extends StatelessWidget {
             Container(
               height: 10,
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'OTP',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              height: 10,
-            ),
-            Container(
-              width: 300,
-              child: TextField(
-                controller: mailotp,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    hintText: 'Enter OTP',
-                    suffixIcon: TextButton(
-                      child: Text("Send OTP"),
-                      onPressed: () async {
-                        myauth.setConfig(
-                          appEmail: "grishikesh2003@gmail.com",
-                          appName: "Email OTP",
-                          userEmail: emailval.text,
-                          otpLength: 6,
-                          otpType: OTPType.digitsOnly,
-                        );
-                        if (await myauth.sendOTP() == true) {
-                          print("OTP sent successfully");
-                        } else {
-                          print("OTP could not be sent");
-                          const snackBar = SnackBar(
-                            content: Text('Please enter valid Email Id'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   child: Text(
+            //     'OTP',
+            //     style: TextStyle(fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // Container(
+            //   height: 10,
+            // ),
+            // Container(
+            //   width: 300,
+            //   child: TextField(
+            //     controller: mailotp,
+            //     keyboardType: TextInputType.number,
+            //     decoration: InputDecoration(
+            //         hintText: 'Enter OTP',
+            //         suffixIcon: TextButton(
+            //           child: Text("Send OTP"),
+            //           onPressed: () async {
+            //             myauth.setConfig(
+            //               appEmail: "grishikesh2003@gmail.com",
+            //               appName: "Email OTP",
+            //               userEmail: emailval.text,
+            //               otpLength: 6,
+            //               otpType: OTPType.digitsOnly,
+            //             );
+            //             if (await myauth.sendOTP() == true) {
+            //               print("OTP sent successfully");
+            //             } else {
+            //               print("OTP could not be sent");
+            //               const snackBar = SnackBar(
+            //                 content: Text('Please enter valid Email Id'),
+            //               );
+            //               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            //             }
+            //           },
+            //         ),
+            //         border: OutlineInputBorder(
+            //           borderRadius: BorderRadius.circular(20),
+            //         )),
+            //   ),
+            // ),
             ElevatedButton(
                 onPressed: () async {
-                  if (await myauth.verifyOTP(otp: mailotp.text) == true) {
+                  // if (await myauth.verifyOTP(otp: mailotp.text) == true) {
                     try {
                       UserCredential userCredential = await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
@@ -154,7 +154,7 @@ class signup_screen extends StatelessWidget {
                           .onError((e, _) => print("Error writing document: $e"));
       
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => phone_otp()));
+                          MaterialPageRoute(builder: (context) => home_screen()));
       
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
@@ -173,12 +173,12 @@ class signup_screen extends StatelessWidget {
                     } catch (e) {
                       print(e);
                     }
-                  } else {
-                    const snackBar = SnackBar(
-                      content: Text('Incorrect OTP entered'),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
+                  // } else {
+                  //   const snackBar = SnackBar(
+                  //     content: Text('Incorrect OTP entered'),
+                  //   );
+                  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  // }
                 },
                 child: Text('Sign-Up'))
           ],
