@@ -31,7 +31,7 @@ class _PostState extends State<Post> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -43,7 +43,7 @@ class _PostState extends State<Post> {
         const Padding(
           padding: EdgeInsets.only(top: 20, left: 20),
           child: Text(
-            'Uploded Image',
+            'Original Image',
             style: TextStyle(
                 fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
           ),
@@ -54,12 +54,17 @@ class _PostState extends State<Post> {
         Container(
           width: size.width,
           height: size.height/2,
-          child: Image.memory(img1,fit: BoxFit.fill,)),
+          child: InteractiveViewer(
+              boundaryMargin: const EdgeInsets.all(20.0),
+              minScale: 0.1,
+              maxScale: 10,
+              child: Image.memory((img1),fit: BoxFit.fill,),
+            ),),
         const SizedBox(height: 30,),
         const Padding(
           padding: EdgeInsets.only(top: 20, left: 20),
           child: Text(
-            'Result Image',
+            'Predicted Image', 
             style: TextStyle(
                 fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),
           ),
@@ -70,7 +75,12 @@ class _PostState extends State<Post> {
         SizedBox(
           width: size.width,
           height: size.height/2,
-          child: Image.memory(img2,fit: BoxFit.fill,)
+          child: InteractiveViewer(
+              boundaryMargin: const EdgeInsets.all(20.0),
+              minScale: 0.1,
+              maxScale: 10,
+              child: Image.memory((img2),fit: BoxFit.fill,),
+            ),
           ),
         // CarouselSlider.builder(
         //   itemCount: 2,
